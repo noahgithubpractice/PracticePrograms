@@ -15,6 +15,8 @@ import javax.swing.JEditorPane;
 /**
  * 11/23/14
  * @author noah
+ * Every 2 hours launches your favorite music video
+ * Performs this action 3 times
  */
 
 public class TakeABreak {
@@ -57,26 +59,33 @@ public class TakeABreak {
         return count;  
     }
     /**
-     * every 2 hours launch a web page
+     * every 2 hours launch a web page 
+     * performs action 3 times
      */
     public static void runTimer(){
-        int delay = 7200000;   // delay for 2 hours
-        int period = 7200000;  // repeat every 2 hours
+        int delay = 7200 * 1000;   // delay for 2 hours
+        int period = 7200 * 1000;  // repeat every 2 hours
         Timer timer = new Timer();
+        
          
           timer.scheduleAtFixedRate(new TimerTask() {
+                int times_run = 0;
                 long startTimeHashtable = System.currentTimeMillis();          
                 public void run() {
                     System.out.println(formatHHMMSS(5));                   
                     try {
                         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-                    } catch (IOException ex) {
+                        times_run++;
+                         } catch (IOException ex) {
                         Logger.getLogger(TakeABreak.class.getName()).log(Level.SEVERE, null, ex);
                     }
-      
+                   
                 long endTimeHashtable   = System.currentTimeMillis();
                 long totalTimeHashtable = endTimeHashtable - startTimeHashtable; 
                 System.out.println(totalTimeHashtable);
+                    if(times_run == 3){
+                        System.exit(0);
+                    }
                 }
                 
             }, delay, period);
@@ -88,4 +97,6 @@ public class TakeABreak {
     }
 
 } // end of class TakeABreak
+
+
 
