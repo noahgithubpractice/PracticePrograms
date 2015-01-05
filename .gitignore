@@ -1,2 +1,4 @@
 *.class
 *.DS_Store
+/python programs/SendText/nbproject/private/
+/java programs/SendText/build/
